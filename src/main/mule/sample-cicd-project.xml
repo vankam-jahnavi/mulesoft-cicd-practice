@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a47f5c75-4b37-47a6-b84a-aebbb751174e" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="sample-cicd-projectFlow" doc:id="a245cd1c-2c93-4b5f-a656-d377ab3ec7a8" >
+		<http:listener doc:name="Listener" doc:id="89a1d1d4-abc0-4a18-907d-8a75c5c7cd40" config-ref="HTTP_Listener_config" path="/sample"/>
+		<logger level="INFO" doc:name="Logger" doc:id="95f749bb-1fb7-4262-bf40-b1120a76d243" message="Flow starts"/>
+		<ee:transform doc:name="Transform Message" doc:id="d0ce4248-d489-496c-8209-ce7ffa4fc7db" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+[
+    {
+        "id": 1,
+        "name": "Rahul Sharma",
+        "email": "rahul.sharma@gmail.com",
+        "phone": "9876543201",
+        "location": "Hyderabad"
+    },
+    {
+        "id": 2,
+        "name": "Priya Reddy",
+        "email": "priya.reddy@gmail.com",
+        "phone": "9876543202",
+        "location": "Bangalore"
+    },
+    {
+        "id": 3,
+        "name": "Amit Kumar",
+        "email": "amit.kumar@gmail.com",
+        "phone": "9876543203",
+        "location": "Chennai"
+    },
+    {
+        "id": 4,
+        "name": "Sneha Patel",
+        "email": "sneha.patel@gmail.com",
+        "phone": "9876543204",
+        "location": "Mumbai"
+    },
+    {
+        "id": 5,
+        "name": "Arjun Rao",
+        "email": "arjun.rao@gmail.com",
+        "phone": "9876543205",
+        "location": "Pune"
+    },
+    {
+        "id": 6,
+        "name": "Ananya Singh",
+        "email": "ananya.singh@gmail.com",
+        "phone": "9876543206",
+        "location": "Delhi"
+    },
+    {
+        "id": 7,
+        "name": "Vikram Das",
+        "email": "vikram.das@gmail.com",
+        "phone": "9876543207",
+        "location": "Kolkata"
+    },
+    {
+        "id": 8,
+        "name": "Kavya Nair",
+        "email": "kavya.nair@gmail.com",
+        "phone": "9876543208",
+        "location": "Kochi"
+    },
+    {
+        "id": 9,
+        "name": "Rohit Verma",
+        "email": "rohit.verma@gmail.com",
+        "phone": "9876543209",
+        "location": "Jaipur"
+    },
+    {
+        "id": 10,
+        "name": "Pooja Mehta",
+        "email": "pooja.mehta@gmail.com",
+        "phone": "9876543210",
+        "location": "Ahmedabad"
+    }
+  ]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="f9f1bdb6-81b3-4a23-bf2a-c76125eb45ae" message="Result: #[payload]"/>
+	</flow>
+</mule>
