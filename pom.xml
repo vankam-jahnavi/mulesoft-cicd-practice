@@ -27,25 +27,32 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
+
 					<cloudhub2Deployment>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<provider>MC</provider>
-						<muleVersion>4.9.11</muleVersion>
-						<server>anypoint-exchange-v3</server>
-						<username>Jahnavi-Nov</username>
-						<password>Jahnavi@2002</password>
-						<businessGroupId>ce91ac83-da56-4f30-8183-8102f9600ef5</businessGroupId>
-						<environment>Dev</environment>
-						<target>Cloudhub-US-East-2</target>
-						<applicationName>cicd20maven</applicationName>
+
+						<environment>${anypoint.environment}</environment>
+						<target>${anypoint.target}</target>
+						<businessGroupId>${anypoint.businessGroupId}</businessGroupId>
+
+						<muleVersion>${app.runtime}</muleVersion>
+
+						<connectedAppClientId>ff2af2f9c6c7447497f340325da7d2ab</connectedAppClientId>
+						<connectedAppClientSecret>2c871ca3de31458490cf5E483ABF42A6</connectedAppClientSecret>
+						<connectedAppGrantType>client_credentials</connectedAppGrantType>
+
+						<applicationName>cicd-mule-api</applicationName>
 						<replicas>1</replicas>
 						<vCores>0.1</vCores>
+
 						<deploymentSettings>
 							<lastMileSecurity>false</lastMileSecurity>
 							<forwardSslSession>false</forwardSslSession>
 							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
 						</deploymentSettings>
 					</cloudhub2Deployment>
+
 				</configuration>
 			</plugin>
 
@@ -68,7 +75,7 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>org.mule.connectors</groupId> 
+			<groupId>org.mule.connectors</groupId>
 			<artifactId>mule-sockets-connector</artifactId>
 			<version>1.2.7</version>
 			<classifier>mule-plugin</classifier>
